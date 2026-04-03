@@ -1,27 +1,27 @@
-# TraceTop 无限纪行
+# HoloScroll| 全息卷轴
 
 ## 项目简介 / Project Introduction
 ### 构建属于每个人的成长哲学，存在，探索，成为自己。
-### TraceTop 用 AI 把“成长”变成可计算、可解释、可推荐的动态技能宇宙——你的下一颗星，算法已帮你点亮。
+### HoloScroll 用 AI 把“成长”变成可计算、可解释、可推荐的动态技能宇宙——你的下一颗星，算法已帮你点亮。
 
 
-**TraceTop** 是一款融合哲学思考与工程设计的个人成长体系化记录与规划工具，旨在为用户提供一种全新的成长记录方式。它通过渐进式思想、非线性并行记录、多维度科技树、流式时间轴以及智能分析，为用户搭建了一个动态的个人成长体系。
+**HoloScroll** 是一款融合哲学思考与工程设计的个人成长体系化记录与规划工具，旨在为用户提供一种全新的成长记录方式。它通过渐进式思想、非线性并行记录、多维度科技树、流式时间轴以及智能分析，为用户搭建了一个动态的个人成长体系。
 
-**TraceTop** is a personal growth system recording and planning tool that integrates philosophical thinking and engineering design. It offers users a new way to document growth through concepts like gradual progression, nonlinear parallel recording, multidimensional skill trees, streaming timelines, and intelligent analysis.
+**HoloScroll** is a personal growth system recording and planning tool that integrates philosophical thinking and engineering design. It offers users a new way to document growth through concepts like gradual progression, nonlinear parallel recording, multidimensional skill trees, streaming timelines, and intelligent analysis.
 
 ---
 
 ## 项目原由与思维过程 / Origin and Thought Process
 
-作者在设计 TraceTop 时，融入了自己对成长与探索的深刻理解。成长的意义在于逐步构建与完善，而非追求瞬间的跃迁。以下是项目背后的核心思考：
+作者[@ClovreIris](https://github.com/CloverIris)在设计 HoloScroll 时，融入了自己对成长与探索的深刻理解。成长的意义在于逐步构建与完善，而非追求瞬间的跃迁。以下是项目背后的核心思考：
 
 - **渐近式哲学**：成长如同音乐中的渐强符号，层层递进，逐步丰富。这款工具帮助用户清晰记录每一步积累，为下一步奠定坚实基础。
 - **边界与探索**：成长的过程是突破边界的过程。通过可视化的成长科技树，用户可以明确自身的能力边界并发现潜在的突破口。
-- **非线性记录**：生活和成长并非总是线性的。TraceTop 支持多维度的并行记录，将点滴片段融合为体系化的成长网络。
+- **非线性记录**：生活和成长并非总是线性的。HoloScroll 支持多维度的并行记录，将点滴片段融合为体系化的成长网络。
 - **实时灵感捕捉**：成长中的每一个灵感都应被珍视。流式时间轴功能允许用户即时记录，保证每个想法都不会被遗忘。
 - **智能分析与规划**：通过数据驱动的方式，工具能够动态分析用户的成长轨迹，发现薄弱点，提出建议，并预测未来发展方向。
 
-The creator) infused profound insights into growth and exploration into Grow Crescendo. Growth is a journey of gradual construction and refinement, rather than instant leaps. The core philosophies include:
+The creator[@ClovreIris](https://github.com/CloverIris) infused profound insights into growth and exploration into HoloScroll. Growth is a journey of gradual construction and refinement, rather than instant leaps. The core philosophies include:
 
 - **Gradual Philosophy**: Like a crescendo in music, growth progresses layer by layer. This tool helps users record every step clearly, building a solid foundation for the next stage.
 - **Boundaries and Exploration**: Growth is about breaking boundaries. The visualized growth skill tree enables users to identify their limits and uncover potential breakthroughs.
@@ -65,11 +65,11 @@ The creator) infused profound insights into growth and exploration into Grow Cre
 
 ## 项目愿景 / Vision
 
-TraceTop 的目标不仅是一款工具，更是一种哲学理念的探索与实践。它希望传递的思想是：
+HoloScroll 的目标不仅是一款工具，更是一种哲学理念的探索与实践。它希望传递的思想是：
 
-成长是一场逐渐构建和完善的旅程。每一步的积累都是未来无限可能性的铺垫。通过 TraceTop，每个人都可以找到自己的成长节奏，构建属于自己的成长体系。
+成长是一场逐渐构建和完善的旅程。每一步的积累都是未来无限可能性的铺垫。通过 HoloScroll，每个人都可以找到自己的成长节奏，构建属于自己的成长体系。
 
-The vision of TraceTop is not merely to be a tool but a philosophical exploration and practice. It aims to convey that growth is a journey of gradual construction and refinement. Each step is a foundation for infinite possibilities ahead. With TraceTop, everyone can discover their rhythm of growth and build their unique growth system.
+The vision of HoloScroll is not merely to be a tool but a philosophical exploration and practice. It aims to convey that growth is a journey of gradual construction and refinement. Each step is a foundation for infinite possibilities ahead. With HoloScroll, everyone can discover their rhythm of growth and build their unique growth system.
 
 ---
 
