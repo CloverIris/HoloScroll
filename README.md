@@ -1,4 +1,4 @@
-# HoloScroll| 全息卷轴
+# HoloScroll | 全息卷轴
 
 ## 项目简介 / Project Introduction
 ### 构建属于每个人的成长哲学，存在，探索，成为自己。
