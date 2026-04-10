@@ -19,25 +19,16 @@ const createWindow = () => {
 
   // 加载页面
   if (process.env.VITE_DEV_SERVER_URL) {
+    // 开发模式：加载 Vite 开发服务器
     mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
-    mainWindow.webContents.openDevTools();
   } else {
+    // 生产模式：加载打包后的文件
     const indexPath = path.join(__dirname, '../dist/index.html');
-    console.log('Loading file:', indexPath);
-    mainWindow.loadFile(indexPath).catch(err => {
-      console.error('Failed to load file:', err);
-    });
-    // 生产环境也打开 DevTools 以便调试
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadFile(indexPath);
   }
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
-  });
-  
-  // 监听加载失败
-  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
-    console.error('Failed to load:', errorCode, errorDescription);
   });
 };
 
