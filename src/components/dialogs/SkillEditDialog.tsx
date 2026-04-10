@@ -17,7 +17,7 @@ import {
 } from '@fluentui/react-components';
 import { Dismiss20Regular } from '@fluentui/react-icons';
 import { colors, spacing } from '../../styles/design-system';
-import { Skill } from '../../stores/database';
+import type { Skill } from '../../stores/database';
 
 const useStyles = makeStyles({
   form: {

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { db, Achievement, initSampleData } from './database';
+import { db, initSampleData } from './database';
+import type { Achievement } from './database';
 
 interface AchievementState {
   achievements: Achievement[];

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { db, TimelineEvent, initSampleData } from './database';
+import { db, initSampleData } from './database';
+import type { TimelineEvent } from './database';
 
 interface TimelineState {
   events: TimelineEvent[];

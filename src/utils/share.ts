@@ -1,5 +1,5 @@
 import html2canvas from 'html2canvas';
-import { Achievement } from '../stores/database';
+import type { Achievement } from '../stores/database';
 
 // 生成成就分享文本
 export function generateAchievementText(achievement: Achievement): string {

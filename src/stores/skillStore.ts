@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { db, Skill, initSampleData } from './database';
+import { db, initSampleData } from './database';
+import type { Skill } from './database';
 
 interface SkillState {
   skills: Skill[];
