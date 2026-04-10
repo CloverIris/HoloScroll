@@ -50,6 +50,7 @@ import { ErrorBoundary } from '../components/ErrorBoundary';
 import { colors, spacing, shadows, transitions } from '../styles/design-system';
 import { useSkillStore } from '../stores/skillStore';
 import { SkillEditDialog } from '../components/dialogs/SkillEditDialog';
+import { GameSkillTree, type GameSkillTreeRef } from '../components/skilltree/GameSkillTree';
 
 import '../styles/acrylic.css';
 
@@ -892,7 +893,7 @@ export function SkillTreePage() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [isNewSkill, setIsNewSkill] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
-  const svgContainerRef = useRef<SkillTreeVisualizationRef | null>(null);
+  const svgContainerRef = useRef<GameSkillTreeRef | null>(null);
 
   // 加载数据
   useEffect(() => {
@@ -1068,9 +1069,10 @@ export function SkillTreePage() {
             <EmptyState onCreate={handleAddSkill} />
           ) : (
             <>
-              <SkillTreeVisualization 
+              <GameSkillTree 
                 skills={filteredSkills} 
                 onSkillClick={handleSkillClick}
+                aiRecommendations={['skill-1', 'skill-2']}
                 ref={svgContainerRef}
               />
 
