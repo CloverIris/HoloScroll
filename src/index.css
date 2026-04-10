@@ -1,0 +1,356 @@
+@import "tailwindcss";
+@import "./styles/acrylic.css";
+
+/* ============================================
+   HoloScroll 全局样式
+   ============================================ */
+
+/* 使用 Tailwind v4 的标准 @theme 语法定义颜色 */
+@theme {
+  --color-bg-primary: #0c0c0c;
+  --color-bg-secondary: #1c1c1c;
+  --color-bg-tertiary: #2d2d2d;
+  --color-bg-elevated: #292929;
+  
+  --color-accent: #60cdff;
+  --color-accent-secondary: #0093f5;
+  --color-accent-dark: #005eb8;
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cccccc;
+  --color-text-tertiary: #999999;
+  
+  --color-border-subtle: #1f1f1f;
+  --color-border-default: #3f3f3f;
+  
+  --color-tech: #60cdff;
+  --color-creative: #ffaa44;
+  --color-academic: #00d26a;
+  --color-social: #cc99ff;
+  
+  /* 技能树颜色 */
+  --color-skill-technical: #60cdff;
+  --color-skill-creative: #ffaa44;
+  --color-skill-academic: #00d26a;
+  --color-skill-social: #cc99ff;
+  --color-skill-physical: #ff6b6b;
+  --color-skill-mindset: #ffd93d;
+  
+  /* 稀有度颜色 */
+  --color-rarity-common: #9ca3af;
+  --color-rarity-rare: #60cdff;
+  --color-rarity-epic: #cc99ff;
+  --color-rarity-legendary: #ffaa44;
+}
+
+/* ----------------------------------------
+   全局基础样式
+   ---------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #0c0c0c;
+  color: #ffffff;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+/* ----------------------------------------
+   滚动条 - Fluent 风格
+   ---------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox 滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* ----------------------------------------
+   全局动画
+   ---------------------------------------- */
+
+/* Fade In */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(16px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fadeInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+/* Slide */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(96, 205, 255, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(96, 205, 255, 0.6); }
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Spin */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Bounce */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Glow */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(96, 205, 255, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(96, 205, 255, 0.6); }
+}
+
+/* ----------------------------------------
+   动画类
+   ---------------------------------------- */
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.3s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.2s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-slide-out-right {
+  animation: slideOutRight 0.3s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   动画延迟工具类
+   ---------------------------------------- */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ----------------------------------------
+   过渡效果
+   ---------------------------------------- */
+.transition-fast {
+  transition: all 150ms ease;
+}
+
+.transition-normal {
+  transition: all 200ms ease;
+}
+
+.transition-slow {
+  transition: all 300ms ease;
+}
+
+.transition-bounce {
+  transition: all 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.transition-colors {
+  transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease;
+}
+
+.transition-transform {
+  transition: transform 200ms ease;
+}
+
+/* ----------------------------------------
+   文字工具类
+   ---------------------------------------- */
+.text-gradient {
+  background: linear-gradient(135deg, #60cdff 0%, #0093f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa44 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ----------------------------------------
+   隐藏工具类
+   ---------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ----------------------------------------
+   聚焦样式
+   ---------------------------------------- */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(96, 205, 255, 0.5);
+}
+
+/* ----------------------------------------
+   禁用状态
+   ---------------------------------------- */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

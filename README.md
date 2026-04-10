@@ -73,9 +73,17 @@ The vision of HoloScroll is not merely to be a tool but a philosophical explorat
 
 ---
 
+## 文档 / Documentation
+
+- [产品需求文档 (PRD)](docs/PRD.md) - 产品功能规划与需求
+- [架构文档](docs/ARCHITECTURE.md) - 系统架构与技术选型
+- [开发指南](docs/DEVELOPMENT.md) - 开发环境搭建与贡献指南
+
 ## 贡献与反馈 / Contribution and Feedback
 
 欢迎提交问题、建议或参与项目开发。
 
-Contributions, suggestions, and feedback are welcome. 
+Contributions, suggestions, and feedback are welcome.
+
+请阅读 [开发指南](docs/DEVELOPMENT.md) 了解如何参与项目。 
 

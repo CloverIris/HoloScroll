@@ -1,0 +1,35 @@
+appId: com.holoscroll.app
+productName: HoloScroll
+copyright: Copyright © 2024 HoloScroll
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**/*
+  - dist-electron/**/*
+extraResources:
+  - from: public
+    to: public
+win:
+  target:
+    - target: nsis
+      arch: x64
+    - target: portable
+      arch: x64
+  icon: public/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+mac:
+  target:
+    - dmg
+    - zip
+  icon: public/icon.png
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: public/icon.png
+  category: Office
