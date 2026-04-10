@@ -48,6 +48,8 @@ import {
 } from '@fluentui/react-icons';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { colors, spacing, shadows, transitions } from '../styles/design-system';
+import { useSkillStore } from '../stores/skillStore';
+import { SkillEditDialog } from '../components/dialogs/SkillEditDialog';
 
 import '../styles/acrylic.css';
 
@@ -877,14 +879,21 @@ function DeleteConfirmDialog({
 
 export function SkillTreePage() {
   const styles = useStyles();
-  const [skills, setSkills] = useState<Skill[]>(SAMPLE_SKILLS);
+  const { skills, loadSkills, addSkill, updateSkill, deleteSkill, upgradeSkill } = useSkillStore();
   const [selectedCategory, setSelectedCategory] = useState<SkillCategory>('all');
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [isNewSkill, setIsNewSkill] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const svgContainerRef = useRef<SkillTreeVisualizationRef | null>(null);
+
+  // 加载数据
+  useEffect(() => {
+    loadSkills();
+  }, [loadSkills]);
 
   // 筛选后的技能
   const filteredSkills = useMemo(() => {
@@ -901,17 +910,9 @@ export function SkillTreePage() {
 
   // 处理添加技能
   const handleAddSkill = () => {
-    const newSkill: Skill = {
-      id: Date.now().toString(),
-      name: '新技能',
-      description: '点击编辑描述',
-      category: 'technical',
-      level: 1,
-      maxLevel: 5,
-      prerequisites: [],
-      unlockedAt: new Date().toISOString().split('T')[0],
-    };
-    setSkills(prev => [...prev, newSkill]);
+    setIsNewSkill(true);
+    setSelectedSkill(null);
+    setEditDialogOpen(true);
   };
 
   // 处理技能点击
@@ -923,17 +924,24 @@ export function SkillTreePage() {
   // 处理技能升级
   const handleUpgrade = () => {
     if (!selectedSkill) return;
-    setSkills(prev =>
-      prev.map(s =>
-        s.id === selectedSkill.id ? { ...s, level: Math.min(s.level + 1, s.maxLevel) } : s
-      )
-    );
+    upgradeSkill(selectedSkill.id);
     setSelectedSkill(prev => prev ? { ...prev, level: Math.min(prev.level + 1, prev.maxLevel) } : null);
   };
 
   // 处理技能编辑
   const handleEdit = () => {
-    console.log('Edit skill:', selectedSkill?.id);
+    setIsNewSkill(false);
+    setEditDialogOpen(true);
+  };
+
+  // 处理保存技能（新建或编辑）
+  const handleSaveSkill = (skillData: Partial<Skill>) => {
+    if (isNewSkill) {
+      addSkill(skillData as Omit<Skill, 'id' | 'createdAt' | 'updatedAt'>);
+    } else if (selectedSkill) {
+      updateSkill(selectedSkill.id, skillData);
+      setSelectedSkill(prev => prev ? { ...prev, ...skillData } : null);
+    }
   };
 
   // 处理技能删除
@@ -943,7 +951,7 @@ export function SkillTreePage() {
 
   const confirmDelete = () => {
     if (!selectedSkill) return;
-    setSkills(prev => prev.filter(s => s.id !== selectedSkill.id));
+    deleteSkill(selectedSkill.id);
     setDeleteDialogOpen(false);
     setDrawerOpen(false);
     setSelectedSkill(null);
@@ -1115,6 +1123,15 @@ export function SkillTreePage() {
           onOpenChange={setDeleteDialogOpen}
           onConfirm={confirmDelete}
           skillName={selectedSkill?.name || ''}
+        />
+
+        {/* 技能编辑对话框 */}
+        <SkillEditDialog
+          open={editDialogOpen}
+          onOpenChange={setEditDialogOpen}
+          skill={isNewSkill ? null : selectedSkill}
+          allSkills={skills}
+          onSave={handleSaveSkill}
         />
       </div>
     </ErrorBoundary>

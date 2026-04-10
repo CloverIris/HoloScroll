@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   Button,
   Card,
@@ -64,6 +64,7 @@ import {
   Lightbulb24Regular,
 } from '@fluentui/react-icons';
 import { colors, spacing, radius, shadows, transitions } from '../styles/design-system';
+import { useTimelineStore } from '../stores/timelineStore';
 
 // ============================================
 // 字体系统 (局部定义)
@@ -581,8 +582,15 @@ const isThisYear = (dateStr: string): boolean => {
 export function TimelinePage() {
   const styles = useStyles();
   
+  // Store
+  const { events, loadEvents, addEvent, updateEvent, deleteEvent } = useTimelineStore();
+  
+  // 加载数据
+  useEffect(() => {
+    loadEvents();
+  }, [loadEvents]);
+  
   // 状态
-  const [events, setEvents] = useState<TimelineEvent[]>(sampleEvents);
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<EventCategory | 'all'>('all');
   const [timeFilter, setTimeFilter] = useState<TimeFilter>('all');
@@ -672,16 +680,14 @@ export function TimelinePage() {
   const handleQuickAdd = () => {
     if (!quickInput.trim()) return;
     
-    const newEvent: TimelineEvent = {
-      id: Date.now().toString(),
+    addEvent({
       title: quickInput.slice(0, 30) + (quickInput.length > 30 ? '...' : ''),
       content: quickInput,
       category: quickCategory,
       date: new Date().toISOString().split('T')[0],
       tags: [],
-    };
+    });
     
-    setEvents(prev => [newEvent, ...prev]);
     setQuickInput('');
   };
 
@@ -710,24 +716,22 @@ export function TimelinePage() {
     if (!formData.title || !formData.content) return;
     
     if (editingEvent) {
-      setEvents(prev => prev.map(e => e.id === editingEvent.id ? { ...e, ...formData } as TimelineEvent : e));
+      updateEvent(editingEvent.id, formData);
     } else {
-      const newEvent: TimelineEvent = {
-        id: Date.now().toString(),
+      addEvent({
         title: formData.title!,
         content: formData.content!,
         category: formData.category as EventCategory,
         date: formData.date!,
         tags: formData.tags || [],
-      };
-      setEvents(prev => [newEvent, ...prev]);
+      });
     }
     setIsDialogOpen(false);
   };
 
   // 删除事件
   const handleDelete = (id: string) => {
-    setEvents(prev => prev.filter(e => e.id !== id));
+    deleteEvent(id);
   };
 
   // 添加标签到表单

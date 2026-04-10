@@ -40,6 +40,9 @@ import {
   DonutChart,
 } from '@fluentui/react-charting';
 import { skillCategoryColors } from '../styles/fluent-theme';
+import { exportToJSON, exportToImage, exportToPDF } from '../utils/export';
+import { useSkillStore } from '../stores/skillStore';
+import { useToast } from '../components/fluent/ToastProvider';
 
 // ============================================
 // 样式定义
@@ -437,11 +440,39 @@ function InsightCard({ insight }: InsightCardProps) {
 // ============================================
 export function AnalysisPage() {
   const styles = useStyles();
+  const { toast } = useToast();
+  const { skills } = useSkillStore();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const handleExport = (type: string) => {
-    console.log(`导出数据: ${type}`);
-    // 实际实现导出逻辑
+  const handleExport = async (type: string) => {
+    try {
+      const exportData = {
+        skills,
+        exportTime: new Date().toISOString(),
+        version: '1.0',
+      };
+      
+      switch (type) {
+        case 'json':
+          exportToJSON(exportData, `holoscroll-data-${Date.now()}.json`);
+          toast({ title: '导出成功', content: 'JSON 文件已下载', intent: 'success' });
+          break;
+        case 'image':
+          await exportToImage('analysis-content', `holoscroll-analysis-${Date.now()}.png`);
+          toast({ title: '导出成功', content: '图片已下载', intent: 'success' });
+          break;
+        case 'pdf':
+          await exportToPDF('analysis-content', `holoscroll-report-${Date.now()}.pdf`);
+          toast({ title: '导出成功', content: 'PDF 报告已下载', intent: 'success' });
+          break;
+      }
+    } catch (error) {
+      toast({
+        title: '导出失败',
+        content: error instanceof Error ? error.message : '未知错误',
+        intent: 'error',
+      });
+    }
   };
 
   const handleRefresh = () => {
@@ -462,7 +493,7 @@ export function AnalysisPage() {
   );
 
   return (
-    <div className={styles.root}>
+    <div id="analysis-content" className={styles.root}>
       {/* 头部 */}
       <div className={styles.header}>
         <div className={styles.headerContent}>

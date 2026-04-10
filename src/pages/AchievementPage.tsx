@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   Button,
   Card,
@@ -44,6 +44,9 @@ import {
   Lightbulb24Regular,
 } from '@fluentui/react-icons';
 import { rarityColors } from '../styles/fluent-theme';
+import { useAchievementStore } from '../stores/achievementStore';
+import { generateAchievementText, copyToClipboard, generateAchievementLink } from '../utils/share';
+import { useToast } from '../components/fluent/ToastProvider';
 
 // ============================================
 // 样式定义
@@ -697,51 +700,84 @@ function AchievementCard({ achievement, onClick }: AchievementCardProps) {
 // ============================================
 export function AchievementPage() {
   const styles = useStyles();
+  const { achievements, loadAchievements } = useAchievementStore();
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
 
+  // 加载数据
+  useEffect(() => {
+    loadAchievements();
+  }, [loadAchievements]);
+
   // 统计数据
   const stats = useMemo(() => {
-    const unlocked = sampleAchievements.filter((a) => a.progress >= a.maxProgress);
+    const unlocked = achievements.filter((a) => a.progress >= a.maxProgress);
     return {
       total: unlocked.length,
       rare: unlocked.filter((a) => a.rarity === 'rare').length,
       epic: unlocked.filter((a) => a.rarity === 'epic').length,
       legendary: unlocked.filter((a) => a.rarity === 'legendary').length,
     };
-  }, []);
+  }, [achievements]);
 
   // 筛选成就
   const filteredAchievements = useMemo(() => {
     switch (activeFilter) {
       case 'recent':
-        return sampleAchievements
+        return achievements
           .filter((a) => a.unlockedAt)
           .sort((a, b) => new Date(b.unlockedAt!).getTime() - new Date(a.unlockedAt!).getTime());
       case 'locked':
-        return sampleAchievements.filter((a) => a.progress < a.maxProgress);
+        return achievements.filter((a) => a.progress < a.maxProgress);
       case 'rarity':
-        return [...sampleAchievements].sort(
+        return [...achievements].sort(
           (a, b) =>
             ['legendary', 'epic', 'rare', 'common'].indexOf(a.rarity) -
             ['legendary', 'epic', 'rare', 'common'].indexOf(b.rarity)
         );
-      case 'category':
-        return [...sampleAchievements].sort((a, b) => a.category.localeCompare(b.category));
       default:
-        return sampleAchievements;
+        return achievements;
     }
-  }, [activeFilter]);
+  }, [activeFilter, achievements]);
 
   const handleAchievementClick = (achievement: Achievement) => {
     setSelectedAchievement(achievement);
     setDetailOpen(true);
   };
 
-  const handleShare = (type: string) => {
-    console.log(`分享成就: ${type}`);
-    // 实际实现分享逻辑
+  const { toast } = useToast();
+
+  const handleShare = async (type: string) => {
+    if (!selectedAchievement) return;
+    
+    switch (type) {
+      case 'copy':
+        const text = generateAchievementText(selectedAchievement);
+        await copyToClipboard(text);
+        toast({
+          title: '已复制',
+          content: '成就文本已复制到剪贴板',
+          intent: 'success',
+        });
+        break;
+      case 'link':
+        const link = generateAchievementLink(selectedAchievement.id);
+        await copyToClipboard(link);
+        toast({
+          title: '已复制',
+          content: '成就链接已复制到剪贴板',
+          intent: 'success',
+        });
+        break;
+      case 'image':
+        toast({
+          title: '提示',
+          content: '分享图功能即将上线',
+          intent: 'info',
+        });
+        break;
+    }
   };
 
   return (
