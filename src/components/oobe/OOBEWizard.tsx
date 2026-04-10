@@ -22,7 +22,7 @@ import {
   Sparkle24Filled,
   Target24Regular,
   Lightbulb24Regular,
-  Chart24Regular,
+  DataPie24Regular,
   Trophy24Regular,
 } from '@fluentui/react-icons';
 import { useSkillStore } from '../../stores/skillStore';
@@ -227,7 +227,7 @@ const SKILL_TEMPLATES = [
   },
 ];
 
-export function OOBEWizard({ isOpen, onClose, isReopen = false }: OOBEWizardProps) {
+function OOBEWizard({ isOpen, onClose, isReopen = false }: OOBEWizardProps) {
   const styles = useStyles();
   const [step, setStep] = useState(0);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
@@ -506,4 +506,4 @@ export function OOBEWizard({ isOpen, onClose, isReopen = false }: OOBEWizardProp
   );
 }
 
-export default OOBEWizard;
+export { OOBEWizard };

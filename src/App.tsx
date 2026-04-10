@@ -8,9 +8,10 @@ import { SkillTreePage } from './pages/SkillTreePage';
 import { TimelinePage } from './pages/TimelinePage';
 import { AchievementPage } from './pages/AchievementPage';
 import { AnalysisPage } from './pages/AnalysisPage';
+import { SettingsPage } from './pages/SettingsPage';
 import './styles/acrylic.css';
 
-type PageType = 'skills' | 'timeline' | 'achievements' | 'analysis';
+type PageType = 'skills' | 'timeline' | 'achievements' | 'analysis' | 'settings';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageType>('skills');
@@ -19,7 +20,7 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1) as PageType;
-      if (hash && ['skills', 'timeline', 'achievements', 'analysis'].includes(hash)) {
+      if (hash && ['skills', 'timeline', 'achievements', 'analysis', 'settings'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -44,6 +45,8 @@ function App() {
         return <AchievementPage />;
       case 'analysis':
         return <AnalysisPage />;
+      case 'settings':
+        return <SettingsPage />;
       default:
         return <SkillTreePage />;
     }

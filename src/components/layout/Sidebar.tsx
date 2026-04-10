@@ -115,6 +115,7 @@ const navItems = [
   { value: 'timeline', label: '时间轴', icon: Clock24Regular },
   { value: 'achievements', label: '成就', icon: Trophy24Regular },
   { value: 'analysis', label: '分析', icon: ChartPerson24Regular },
+  { value: 'settings', label: '设置', icon: Settings24Regular },
 ];
 
 const recentItems = [
@@ -210,16 +211,6 @@ export function Sidebar({ currentPage, onNavigate }: SidebarProps) {
 
       {/* 底部操作 */}
       <div className={styles.bottomSection}>
-        {!collapsed && (
-          <Button
-            appearance="subtle"
-            icon={<Settings24Regular />}
-            onClick={() => onNavigate('settings')}
-            style={{ width: '100%', justifyContent: 'flex-start', marginBottom: 8 }}
-          >
-            设置
-          </Button>
-        )}
         <Tooltip
           content={collapsed ? '展开菜单' : '收起菜单'}
           positioning="after"
