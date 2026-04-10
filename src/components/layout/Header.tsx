@@ -4,8 +4,6 @@ import {
   BreadcrumbItem,
   BreadcrumbButton,
   BreadcrumbDivider,
-  SearchBox,
-  Badge,
   Avatar,
   makeStyles,
   tokens,
@@ -15,60 +13,122 @@ import {
   Search24Regular,
   Alert24Regular,
   Settings24Regular,
-  MoreHorizontal24Regular,
   BranchFork24Regular,
   Clock24Regular,
   Trophy24Regular,
   ChartPerson24Regular,
+  Sparkle24Filled,
 } from '@fluentui/react-icons';
 import type { PageType } from './AppLayout';
 
 const useStyles = makeStyles({
   header: {
-    height: '56px',
+    height: '64px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0 24px',
-    borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
-    backgroundColor: tokens.colorNeutralBackground1,
+    borderBottom: `1px solid rgba(255, 255, 255, 0.06)`,
+    background: `linear-gradient(180deg, rgba(18, 18, 22, 0.95) 0%, rgba(12, 12, 16, 0.98) 100%)`,
+    backdropFilter: 'blur(20px)',
   },
   leftSection: {
     display: 'flex',
     alignItems: 'center',
     gap: '16px',
+    flex: 1,
+  },
+  centerSection: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
   rightSection: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    justifyContent: 'flex-end',
+    gap: '12px',
+    flex: 1,
   },
   searchButton: {
-    minWidth: '200px',
-    justifyContent: 'flex-start',
+    minWidth: '320px',
+    maxWidth: '480px',
+    width: '100%',
+    height: '40px',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    border: `1px solid rgba(255, 255, 255, 0.08)`,
+    borderRadius: '10px',
+    transition: 'all 0.2s ease',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.06)',
+      borderColor: 'rgba(255, 255, 255, 0.12)',
+    },
+  },
+  searchContent: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    color: tokens.colorNeutralForeground3,
+  },
+  searchIcon: {
+    fontSize: '18px',
+    color: tokens.colorNeutralForeground3,
+  },
+  searchText: {
+    fontSize: '14px',
   },
   shortcutHint: {
     display: 'flex',
     alignItems: 'center',
     gap: '4px',
-    marginLeft: '8px',
     color: tokens.colorNeutralForeground3,
     fontSize: '12px',
   },
   kbd: {
-    padding: '2px 6px',
-    backgroundColor: tokens.colorNeutralBackground3,
-    borderRadius: '4px',
+    padding: '3px 8px',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: '6px',
     fontFamily: 'monospace',
     fontSize: '11px',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
   },
   iconButton: {
     position: 'relative',
+    width: '36px',
+    height: '36px',
+    borderRadius: '10px',
   },
   notificationBadge: {
     position: 'absolute',
-    top: '-2px',
-    right: '-2px',
+    top: '4px',
+    right: '4px',
+    width: '8px',
+    height: '8px',
+    borderRadius: '50%',
+    backgroundColor: '#ff5f57',
+    boxShadow: '0 0 8px rgba(255, 95, 87, 0.5)',
+  },
+  aiIndicator: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '6px 12px',
+    backgroundColor: 'rgba(96, 205, 255, 0.08)',
+    borderRadius: '20px',
+    border: '1px solid rgba(96, 205, 255, 0.15)',
+  },
+  aiText: {
+    fontSize: '12px',
+    color: '#60cdff',
+    fontWeight: 500,
+  },
+  divider: {
+    width: '1px',
+    height: '20px',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    margin: '0 4px',
   },
 });
 
@@ -89,7 +149,6 @@ export function Header({ currentPage }: HeaderProps) {
   const pageInfo = pageTitles[currentPage];
 
   const handleSearchClick = () => {
-    // 触发命令面板打开 - 通过键盘事件
     const event = new KeyboardEvent('keydown', {
       key: 'k',
       ctrlKey: true,
@@ -99,7 +158,7 @@ export function Header({ currentPage }: HeaderProps) {
 
   return (
     <header className={styles.header}>
-      {/* 左侧：面包屑和页面标题 */}
+      {/* 左侧：面包屑 */}
       <div className={styles.leftSection}>
         <Breadcrumb>
           <BreadcrumbItem>
@@ -112,27 +171,34 @@ export function Header({ currentPage }: HeaderProps) {
         </Breadcrumb>
       </div>
 
-      {/* 右侧：搜索、快捷操作、通知、用户 */}
-      <div className={styles.rightSection}>
-        {/* 搜索按钮 */}
+      {/* 中间：搜索按钮 */}
+      <div className={styles.centerSection}>
         <Button
           appearance="subtle"
-          icon={<Search24Regular />}
           onClick={handleSearchClick}
           className={styles.searchButton}
         >
-          <span>搜索...</span>
+          <div className={styles.searchContent}>
+            <Search24Regular className={styles.searchIcon} />
+            <span className={styles.searchText}>搜索命令、技能、事件...</span>
+          </div>
           <span className={styles.shortcutHint}>
             <kbd className={styles.kbd}>Ctrl</kbd>
             <span>+</span>
             <kbd className={styles.kbd}>K</kbd>
           </span>
         </Button>
+      </div>
 
-        {/* 快捷操作 */}
-        <Tooltip content="更多操作" relationship="label">
-          <Button appearance="subtle" icon={<MoreHorizontal24Regular />} />
-        </Tooltip>
+      {/* 右侧：操作按钮 */}
+      <div className={styles.rightSection}>
+        {/* AI 指示器 */}
+        <div className={styles.aiIndicator}>
+          <Sparkle24Filled style={{ fontSize: 14, color: '#60cdff' }} />
+          <span className={styles.aiText}>AI 就绪</span>
+        </div>
+
+        <div className={styles.divider} />
 
         {/* 通知 */}
         <Tooltip content="通知" relationship="label">
@@ -141,12 +207,7 @@ export function Header({ currentPage }: HeaderProps) {
             icon={<Alert24Regular />}
             className={styles.iconButton}
           >
-            <Badge
-              size="small"
-              appearance="filled"
-              color="danger"
-              className={styles.notificationBadge}
-            />
+            <span className={styles.notificationBadge} />
           </Button>
         </Tooltip>
 
@@ -155,7 +216,10 @@ export function Header({ currentPage }: HeaderProps) {
           <Avatar
             name="User"
             size={32}
-            style={{ cursor: 'pointer' }}
+            style={{ 
+              cursor: 'pointer',
+              border: '2px solid rgba(255, 255, 255, 0.1)',
+            }}
           />
         </Tooltip>
       </div>

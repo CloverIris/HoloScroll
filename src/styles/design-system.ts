@@ -1,5 +1,5 @@
 // ============================================
-// HoloScroll Design System
+// HoloScroll Design System - Premium Edition
 // ============================================
 
 // 间距系统
@@ -16,60 +16,80 @@ export const spacing = {
 // 圆角系统
 export const radius = {
   none: '0',
-  sm: '4px',
-  md: '8px',
-  lg: '12px',
-  xl: '16px',
+  sm: '6px',
+  md: '10px',
+  lg: '14px',
+  xl: '18px',
   full: '9999px',
 };
 
-// 阴影系统
+// 阴影系统 - 更柔和的多层阴影
 export const shadows = {
-  sm: '0 1px 2px rgba(0,0,0,0.3)',
-  md: '0 4px 8px rgba(0,0,0,0.4)',
-  lg: '0 8px 16px rgba(0,0,0,0.5)',
-  xl: '0 16px 32px rgba(0,0,0,0.6)',
-  glow: '0 0 20px rgba(96,205,255,0.3)',
+  sm: '0 1px 2px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14)',
+  md: '0 4px 6px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.12)',
+  lg: '0 10px 15px rgba(0,0,0,0.25), 0 4px 6px rgba(0,0,0,0.1)',
+  xl: '0 20px 25px rgba(0,0,0,0.3), 0 8px 10px rgba(0,0,0,0.08)',
+  glow: '0 0 30px rgba(96,205,255,0.25), 0 0 60px rgba(96,205,255,0.1)',
+  inner: 'inset 0 1px 2px rgba(255,255,255,0.05)',
 };
 
-// 颜色系统
+// 颜色系统 - 更高级的深色主题
 export const colors = {
+  // 背景层次 - 增加微妙的蓝色调
   bg: {
-    primary: '#0c0c0c',
-    secondary: '#141414',
-    tertiary: '#1e1e1e',
-    elevated: '#242424',
+    primary: '#0a0a0c',      // 主背景 - 略带蓝调的极深黑
+    secondary: '#121216',    // 次级背景
+    tertiary: '#1a1a20',     // 第三层背景
+    elevated: '#22222a',     // 浮起层
+    overlay: 'rgba(10,10,12,0.85)', // 遮罩层
   },
+  // 边框 - 更精致的透明度层次
   border: {
-    subtle: 'rgba(255,255,255,0.08)',
-    default: 'rgba(255,255,255,0.12)',
-    strong: 'rgba(255,255,255,0.18)',
+    subtle: 'rgba(255,255,255,0.04)',
+    default: 'rgba(255,255,255,0.08)',
+    strong: 'rgba(255,255,255,0.14)',
+    accent: 'rgba(96,205,255,0.3)',
   },
+  // 文字 - 更精细的层次
   text: {
     primary: '#ffffff',
-    secondary: 'rgba(255,255,255,0.7)',
-    tertiary: 'rgba(255,255,255,0.45)',
-    disabled: 'rgba(255,255,255,0.3)',
+    secondary: 'rgba(255,255,255,0.72)',
+    tertiary: 'rgba(255,255,255,0.48)',
+    disabled: 'rgba(255,255,255,0.28)',
+    muted: 'rgba(255,255,255,0.35)',
   },
+  // 强调色 - 保留标志性的青色，但增加层次
   accent: {
     DEFAULT: '#60cdff',
-    hover: '#4ba8d4',
-    pressed: '#3d8ab0',
-    glow: 'rgba(96,205,255,0.3)',
+    light: '#85d9ff',
+    dark: '#3db8f0',
+    hover: '#4fc3f7',
+    pressed: '#2e9fd4',
+    glow: 'rgba(96,205,255,0.35)',
+    subtle: 'rgba(96,205,255,0.1)',
   },
+  // 技能类别色 - 微调使其更和谐
   skill: {
-    technical: '#60cdff',
-    creative: '#ffaa44',
-    academic: '#00d26a',
-    social: '#cc99ff',
-    physical: '#ff6b6b',
-    mindset: '#ffd93d',
+    technical: '#5eb8ff',   // 技术蓝 - 稍柔和
+    creative: '#ffb366',    // 创意橙 - 更暖
+    academic: '#4ade80',    // 学术绿 - 更清新
+    social: '#c4a5f7',      // 社交紫 - 更优雅
+    physical: '#ff7a7a',    // 身体红 - 更柔和
+    mindset: '#ffd966',     // 心智黄 - 更温暖
   },
+  // 稀有度颜色
   rarity: {
     common: '#9ca3af',
     rare: '#60cdff',
-    epic: '#cc99ff',
-    legendary: '#ffaa44',
+    epic: '#c4a5f7',
+    legendary: '#ffb366',
+  },
+  // 渐变预设
+  gradients: {
+    surface: 'linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%)',
+    surfaceHover: 'linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
+    accent: 'linear-gradient(135deg, #60cdff 0%, #3db8f0 100%)',
+    glow: 'radial-gradient(circle, rgba(96,205,255,0.15) 0%, transparent 70%)',
   },
 };
 
@@ -91,14 +111,20 @@ export const typography = {
     semibold: 600,
     bold: 700,
   },
+  lineHeights: {
+    tight: 1.25,
+    normal: 1.5,
+    relaxed: 1.75,
+  },
 };
 
 // 动画时间
 export const transitions = {
-  fast: '150ms ease',
-  normal: '200ms ease',
-  slow: '300ms ease',
-  bounce: '300ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+  fast: '150ms cubic-bezier(0.4, 0, 0.2, 1)',
+  normal: '200ms cubic-bezier(0.4, 0, 0.2, 1)',
+  slow: '300ms cubic-bezier(0.4, 0, 0.2, 1)',
+  bounce: '400ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+  spring: '500ms cubic-bezier(0.34, 1.56, 0.64, 1)',
 };
 
 // Z-index 层级
@@ -108,8 +134,9 @@ export const zIndex = {
   sticky: 200,
   overlay: 300,
   modal: 400,
-  toast: 500,
-  tooltip: 600,
+  commandPalette: 9999,
+  toast: 10000,
+  tooltip: 10100,
 };
 
 // 导出完整设计系统

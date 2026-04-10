@@ -596,11 +596,15 @@ const SkillTreeVisualization = React.forwardRef<SkillTreeVisualizationRef, Skill
       }));
       nodesRef.current = nodes;
 
-      // 准备链接数据
+      // 准备链接数据 - 只连接当前可见的节点
+      const skillIds = new Set(skills.map(s => s.id));
       const links: LinkDatum[] = [];
       skills.forEach((skill) => {
         skill.prerequisites.forEach((preId) => {
-          links.push({ source: preId, target: skill.id });
+          // 只有当前置技能也在当前显示的节点中时才创建链接
+          if (skillIds.has(preId)) {
+            links.push({ source: preId, target: skill.id });
+          }
         });
       });
       linksRef.current = links;
